@@ -1,3 +1,12 @@
+/********************************************
+ * Author: Soodeh,...
+ * Version: v.1
+ * Date:   20240418
+ * ------------------------------------------
+ * Description:  
+ * This class can represent the coordinates of each grid point.
+ ********************************************/
+
 public class Coordinate {
     private int x;
     private int y;

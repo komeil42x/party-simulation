@@ -1,15 +1,19 @@
+/********************************************
+ * Author: Soodeh,...
+ * Version: v.1
+ * Date:   20240418
+ * ------------------------------------------
+ * Description:  
+ * This class will extend JPanel and will contain the slider for resizing the grid.
+ * It implements ChangeListener to detect changes in size and update the grid accordingly.
+ ********************************************/
+
 import java.util.Hashtable;
 
 import javax.swing.*;
-//import java.awt.*;
 import javax.swing.event.*;
 
 public class SliderPanel extends JPanel implements ChangeListener{
-
-
-    //1) Add a JSlider component with three values: original size, 1/2 of the original size, and double size.
-    //2) Add a listener to the slider to detect changes in size and update the grid accordingly.
-    //my first try:
 
     private JSlider slider;
     private CustomPanel customPanel;

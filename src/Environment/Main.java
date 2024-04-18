@@ -1,3 +1,14 @@
+/********************************************
+ * Author: Soodeh,...
+ * Version: v.2
+ * Date:   20240412
+ * ------------------------------------------
+ * Description:  
+ * contain the main method and handle the initialization of the Swing application;
+ * the main class which includes JFrame and 
+ * adding custom panels (customPanel and SliderPanel) to it.
+ ********************************************/
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;

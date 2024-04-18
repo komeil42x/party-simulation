@@ -1,4 +1,19 @@
-import javax.swing.*;
+/********************************************
+ * Author: Soodeh,...
+ * Version: v.2
+ * Date:   20240412
+ * ------------------------------------------
+ * Description:  
+ * This class will extend JPanel and will be responsible for drawing the grid floor.
+ * It overrides the paintComponent method to draw the grid floor based on the size and coordinates.
+ * It provides methods to set the size of the grid and retrieve the coordinates.
+ * 
+ * It is responsible for integration with Simulation Control and Avatar Interface:
+ * Pass an instance of CustomPanel to simulation control and avatar interface classes.
+ * These classes can access the occupancy status information using the methods provided by CustomPanel.
+ ********************************************/
+
+ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
@@ -108,6 +123,3 @@ public class CustomPanel extends JPanel {
     }
 }
 
-//Integration with Simulation Control and Avatar Interface:
-//Pass an instance of CustomPanel to simulation control and avatar interface classes.
-//These classes can access the occupancy status information using the methods provided by CustomPanel.
