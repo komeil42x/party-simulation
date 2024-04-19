@@ -1,4 +1,4 @@
-package src.SimulationControl;
+package SimulationControl;
 
 public enum SpaceType {
     EMPTY, 
