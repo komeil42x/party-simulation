@@ -5,7 +5,7 @@ public class SimulationControl {
 	private Avatar[] avatar;
 	
 	public SimulationControl() {
-		
+		jk
 	}
 	
 	public static void main(String[] args) {
