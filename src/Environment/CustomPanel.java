@@ -33,9 +33,9 @@ public class CustomPanel extends JPanel {
     private List<Point> highlightedCells; 
 
     // Constructor
-    /* public CustomPanel() {
+    public CustomPanel() {
         // for panel properties if needed
-    } */
+    }
 
     // Method to highlight specific grid cells
     public void highlightCells(List<Point> cells) {
