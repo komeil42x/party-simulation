@@ -2,13 +2,15 @@ package Avatar_Interface;
 
 public abstract class SuperAvatar {
 
-		private int AvatarID;	// identification of Avatar
+		private int avatarID;	// identification of Avatar
 		//SpaceInfo[] spaceinfo = new SpaceInfo[4];
 		
-		
+		public SuperAvatar(int id) {
+			avatarID = id;
+		}
 		
 		public int getAvatarID() {
-			return AvatarID;
+			return avatarID;
 		}
 		
 		
