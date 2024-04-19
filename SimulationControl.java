@@ -9,7 +9,7 @@ public class SimulationControl {
 	}
 	
 	public static void main(String[] args) {
-		
+		ugfuf
 	}
 
 }
