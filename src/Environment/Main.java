@@ -18,9 +18,9 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-    Environment environment = new Environment();
+    // Environment environment = new Environment();
     
-    environment.startEnvironment();
+    // environment.startEnvironment();
 
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Nightclub Simulation SS24");
