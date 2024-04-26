@@ -1,6 +1,5 @@
 package Avatar_Interface;
 
 public interface AvatarInterface {
-	abstract int getID();
-	abstract void yourTurn(SpaceInfo[] spacesInRange);
+	abstract Direction yourTurn(SpaceInfo[] spacesInRange);
 }
