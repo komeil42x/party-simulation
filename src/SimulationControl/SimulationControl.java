@@ -7,7 +7,7 @@ import Avatar_Interface.*;
 
 public class SimulationControl {
 
-	private ArrayList<AvatarInterface> avatars = new ArrayList<AvatarInterface>();
+	private ArrayList<SuperAvatar> avatars = new ArrayList<SuperAvatar>();
 	private Environment environment;
 	
 	public SimulationControl() {
@@ -21,11 +21,12 @@ public class SimulationControl {
 		}
 	}
 	
-	public void loopThroughAvatars(AvatarInterface[] avatars) {
-		for (AvatarInterface avatar : avatars) {
+	public void loopThroughAvatars(SuperAvatar[] avatars) {
+		for (SuperAvatar avatar : avatars) {
 			SpaceInfo[] si = environment.getAdjacentToAvatar(avatar.getId());
 			Direction dir = avatar.yourTurn(si);
 			boolean hasMoved = environment.moveAvatar(avatar.getID(), dir);
+			avatars.setHasMoved(hasMoved);
 			// Avatar mitteilen, ob er sich tatsächlich bewegt hat: hasMoved
 		}
 	}
