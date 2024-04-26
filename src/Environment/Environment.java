@@ -1,21 +1,16 @@
 package Environment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Environment {
-    private Room room = new Room();
+    private CustomPanel panel = new CustomPanel();
+    private HashMap<Integer,Coordinate> avatarsLocations = new HashMap<>();
 
-    // dictionary to store avatars locations as coordinates (key: avatarId, value: avatar coordinate)
-    private AvatarsLocations avatarsLocations = new AvatarsLocations(); 
 
-    public Environment(){
-        room.paintGrid();
-    }
-
-    // TODO is this better than calling it inside the constructor?
-    // public void startEnvironment() {
-    //     room.paintGrid();
-    // }
+    public void startEnvironment() {
+        panel.createFrame();
+    }  // create the frame for our environment
 
     public ArrayList<SpaceType> getAdjacentToAvatar(int avatarId){
 
@@ -35,10 +30,15 @@ public class Environment {
         int downY = currentY - 1;
 
         // Retrieve what is there in the 2D array/grid
-        SpaceType rightSpace = room.getSpace(rightX, currentY);
-        SpaceType upSpace = room.getSpace(currentX, upY);
-        SpaceType leftSpace = room.getSpace(leftX, currentY);
-        SpaceType downSpace = room.getSpace(currentX, downY);
+        // SpaceType rightSpace = room.getSpace(rightX, currentY);
+        // SpaceType upSpace = room.getSpace(currentX, upY);
+        // SpaceType leftSpace = room.getSpace(leftX, currentY);
+        // SpaceType downSpace = room.getSpace(currentX, downY);
+
+        SpaceType rightSpace = panel.getSpace(rightX, currentY);
+        SpaceType upSpace = panel.getSpace(currentX, upY);
+        SpaceType leftSpace = panel.getSpace(leftX, currentY);
+        SpaceType downSpace = panel.getSpace(currentX, downY);
 
         // Add spaceTypes to array
         adjacentToAvatar.add(rightSpace);

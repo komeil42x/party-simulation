@@ -3,6 +3,7 @@ package SimulationControl;
 import Environment.*;
 import java.util.ArrayList;
 import Avatar_Interface.*;
+import Avatar_Interface.AvatarNasser.*;
 
 
 public class SimulationControl {
@@ -16,8 +17,7 @@ public class SimulationControl {
 		environment = new Environment();
 
 		for (int i = 0; i < 12; i++){
-			avatars.add(new TestAvatar(i));
-			environment.placeAvatar(avatars.get(i).getID());
+			avatars.add(new AvatarNasser(i));
 		}
 	}
 	
