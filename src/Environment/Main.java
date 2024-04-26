@@ -12,7 +12,6 @@ package Environment;
  public class Main {
     public static void main(String[] args) {
         Environment environment = new Environment();
-        environment.startEnvironment();
 
         // environment.
         // environment.getAdjacentToAvatar(1);

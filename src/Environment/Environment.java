@@ -8,7 +8,7 @@ public class Environment {
     private HashMap<Integer,Coordinate> avatarsLocations = new HashMap<>();
 
 
-    public void startEnvironment() {
+    public Environment() {
         panel.createFrame();
     }  // create the frame for our environment
 
