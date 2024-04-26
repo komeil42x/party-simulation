@@ -1,5 +1,5 @@
 package Avatar_Interface;
 
 public interface AvatarInterface {
-	abstract Direction yourTurn(SpaceInfo[] spacesInRange);
+	abstract Direction yourTurn(SpaceType spacesInRange);
 }
