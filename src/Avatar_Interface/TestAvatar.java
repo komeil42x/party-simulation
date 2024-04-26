@@ -1,12 +1,12 @@
 package Avatar_Interface;
 
-public class TestAvatar extends SuperAvatar implements AvatarInterface {
+public class TestAvatar extends SuperAvatar implements AvatarInterface { // implements AvatarInterface
 	public TestAvatar(int id) {
 		super(id);
 	}
 
 	@Override
-	public Direction yourTurn(SpaceInfo[] spacesInRange) {
+	public Direction yourTurn(SpaceType spacesInRange) {
 		int max = 4;
 		int min = 0;
 		int directionNumber = (int) (Math.random() * ((max - min) + 1) + min);
@@ -19,18 +19,21 @@ public class TestAvatar extends SuperAvatar implements AvatarInterface {
 			case 4: return Direction.STAY;
 
 			default: return Direction.STAY;
-		}
+		}	
+	}
+
+	// public void main(String[] args) {
 		
-
-	}
-
-	public static void main(String[] args) {
-		new TestAvatar(42);
-		int TestID = SuperAvatar.getAvatarID();
-
-	}
+	// 	SuperAvatar[] arrayVonSuperAvataren = new SuperAvatar[10];
+	// 	arrayVonSuperAvataren[0] = new TestAvatar(0);
+		
+	// 	arrayVonSuperAvataren[0].getAvatarID();
+	// 	arrayVonSuperAvataren[0].yourTurn(null);
 
 
-
+	// 	//SpaceType spacesInRange;
+	// 	//TestAvatar Maxim = new TestAvatar(42);
+	// 	//int TestID = Maxim.getAvatarID();
+	// }
 
 }
