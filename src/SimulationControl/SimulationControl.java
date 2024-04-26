@@ -24,8 +24,7 @@ public class SimulationControl {
 	public void loopThroughAvatars(AvatarInterface[] avatars) {
 		for (AvatarInterface avatar : avatars) {
 			SpaceInfo[] si = environment.getAdjacentToAvatar(avatar.getId());
-			avatar.yourTurn(si);
-			Direction dir = ;
+			Direction dir = avatar.yourTurn(si);
 			boolean hasMoved = environment.moveAvatar(avatar.getID(), dir);
 			// Avatar mitteilen, ob er sich tatsächlich bewegt hat: hasMoved
 		}
