@@ -22,18 +22,18 @@ public class TestAvatar extends SuperAvatar implements AvatarInterface { // impl
 		}	
 	}
 
-	public void main(String[] args) {
+	// public void main(String[] args) {
 		
-		SuperAvatar[] arrayVonSuperAvataren = new SuperAvatar[10];
-		arrayVonSuperAvataren[0] = new TestAvatar(0);
+	// 	SuperAvatar[] arrayVonSuperAvataren = new SuperAvatar[10];
+	// 	arrayVonSuperAvataren[0] = new TestAvatar(0);
 		
-		arrayVonSuperAvataren[0].getAvatarID();
-		arrayVonSuperAvataren[0].yourTurn(null);
+	// 	arrayVonSuperAvataren[0].getAvatarID();
+	// 	arrayVonSuperAvataren[0].yourTurn(null);
 
 
-		//SpaceType spacesInRange;
-		//TestAvatar Maxim = new TestAvatar(42);
-		//int TestID = Maxim.getAvatarID();
-	}
+	// 	//SpaceType spacesInRange;
+	// 	//TestAvatar Maxim = new TestAvatar(42);
+	// 	//int TestID = Maxim.getAvatarID();
+	// }
 
 }
