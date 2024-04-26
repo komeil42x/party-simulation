@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import javax.swing.*;
 
 public class Room {
+    int numCols;
+    int numRows;
     private ArrayList<ArrayList<SpaceType>> cellsOccupancy;
 
     // create the pitch 
@@ -16,6 +18,8 @@ public class Room {
         pitchPanel.setBackground(Color.WHITE);
         pitchPanel.setPreferredSize(panelLeft.getSize());
         int numRows = lines-1;
+        this.numRows = numRows;
+        this.numCols = numCols;
         cellsOccupancy = new ArrayList<>(numRows);
         
         // initialize array cellsOccupancy
