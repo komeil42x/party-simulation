@@ -1,7 +1,7 @@
 package SimulationControl;
 
 import java.util.ArrayList;
-import AvatarInterface;
+import Avatar_Interface.*;
 
 
 public class SimulationControl {
