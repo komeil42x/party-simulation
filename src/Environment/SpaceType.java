@@ -1,3 +1,5 @@
+package Environment;
+
 
 public enum SpaceType {
     EMPTY,

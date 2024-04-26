@@ -1,5 +1,6 @@
 package SimulationControl;
 
+import Environment.*;
 import java.util.ArrayList;
 import Avatar_Interface.*;
 
