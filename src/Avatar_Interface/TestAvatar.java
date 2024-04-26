@@ -1,12 +1,15 @@
 package Avatar_Interface;
+import java.util.ArrayList;
 
-public class TestAvatar extends SuperAvatar implements AvatarInterface { // implements AvatarInterface
+import Environment.SpaceType;
+
+public class TestAvatar extends SuperAvatar {
 	public TestAvatar(int id) {
 		super(id);
 	}
 
 	@Override
-	public Direction yourTurn(SpaceType spacesInRange) {
+	public Direction yourTurn(ArrayList<SpaceType> si) {
 		int max = 4;
 		int min = 0;
 		int directionNumber = (int) (Math.random() * ((max - min) + 1) + min);
@@ -19,7 +22,7 @@ public class TestAvatar extends SuperAvatar implements AvatarInterface { // impl
 			case 4: return Direction.STAY;
 
 			default: return Direction.STAY;
-		}	
+		}
 	}
 
 	// public void main(String[] args) {

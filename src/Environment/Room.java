@@ -2,7 +2,6 @@ package Environment;
 
 import java.util.ArrayList;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridLayout;
 import javax.swing.*;
 

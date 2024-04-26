@@ -12,6 +12,8 @@ public class Environment {
         panel.createFrame();
     }  // create the frame for our environment
 
+    // TODO create moveAvatar(avatarID, dir)
+
     public ArrayList<SpaceType> getAdjacentToAvatar(int avatarId){
 
         ArrayList<SpaceType> adjacentToAvatar = new ArrayList<>();
