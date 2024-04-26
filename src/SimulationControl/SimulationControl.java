@@ -17,14 +17,14 @@ public class SimulationControl {
 
 		for (int i = 0; i < 12; i++){
 			avatars.add(new TestAvatar(i));
+			environment.placeAvatar(avatars.get(i).getID());
 		}
 	}
 	
 	public void loopThroughAvatars(AvatarInterface[] avatars) {
 		for (AvatarInterface avatar : avatars) {
 			SpaceInfo[] si = environment.getAdjacentToAvatar(avatar.getId());
-			avatar.yourTurn(si);
-			Direction dir = ;
+			Direction dir = avatar.yourTurn(si);
 			boolean hasMoved = environment.moveAvatar(avatar.getID(), dir);
 			// Avatar mitteilen, ob er sich tatsächlich bewegt hat: hasMoved
 		}
