@@ -1,21 +1,24 @@
 package Environment;
 
 import java.util.ArrayList;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridLayout;
+import javax.swing.*;
 
 public class Room {
     private ArrayList<ArrayList<SpaceType>> cellsOccupancy;
-    private CustomPanel grid = new CustomPanel();
-    private int numRows;
-    private int numCols;
 
-    // Constructor
-    public Room() {
-        ArrayList<Integer> roomSize = paintGrid();
-        // TODO is this the best way to set the room size? discuss with team
-        this.numRows = roomSize.get(1);
-        this.numCols = roomSize.get(2);
+    // create the pitch 
+	// ------------------------------------------
+	public void createPitch(JPanel panelLeft, int lines, int numCols) {
+        JPanel pitchPanel = new JPanel(new GridLayout(lines, numCols));
+        pitchPanel.setBackground(Color.WHITE);
+        pitchPanel.setPreferredSize(panelLeft.getSize());
+        int numRows = lines-1;
         cellsOccupancy = new ArrayList<>(numRows);
-        // Initialize the rows
+        
+        // initialize array cellsOccupancy
         for (int i = 0; i < numRows; i++) {
             cellsOccupancy.add(new ArrayList<>(numCols));
             // Initialize the columns within each row
@@ -23,7 +26,25 @@ public class Room {
                 cellsOccupancy.get(i).add(SpaceType.EMPTY); // SpaceType.EMPTY is the default value for the moment
             }
         }
+        // Add border to each cell in the grid
+        for (int i = 0; i < lines; i++) {
+            for (int j = 0; j < numCols; j++) {
+                JPanel cell = new JPanel();
+                cell.setBackground(Color.WHITE);
+                cell.setBorder(BorderFactory.createLineBorder(Color.lightGray));
+                // create tool tip for each cell to identify it later
+                cell.setToolTipText("(" + i + "," + j + ")");
+                pitchPanel.add(cell);
+            }
+        }
+        // create some components
+        // createComponent(pitchPanel,"RED",  new int[]{0, 0}, new int[]{1, 0}, 
+        // new int[]{2, 0}, new int[]{3, 0}, new int[]{0, 1}, new int[]{0, 2}, new int[]{0, 3});
+
+
+        panelLeft.add(pitchPanel);
     }
+
 
     // Method to get the space at a specific coordinate
     public SpaceType getSpace(int x, int y) {
@@ -46,18 +67,6 @@ public class Room {
     // Helper method to check if the given coordinates are valid
     private boolean isValidCoordinate(int x, int y) {
         return x >= 0 && x < numRows && y >= 0 && y < numCols;
-    }
-
-    
-    public ArrayList<Integer> paintGrid() {
-        // TODO implement the drawing part, based on the painted grid, the roomSize is set
-
-        // Array to store the number of columns in the grid (index 1) and the number of rows (index 2)
-        ArrayList<Integer> roomSize = new ArrayList<>(); //index 1 should be numColumns and index 2 numRows 
-        // Dummy values for the moment
-        roomSize.add(10);
-        roomSize.add(10);
-        return roomSize;
     }
 
 }
