@@ -1,18 +1,21 @@
 package Environment;
 
+/********************************************
+ * Author: Soodeh, Ole, Paola
+ * Version: v.2
+ * Date:   20240412
+ * ------------------------------------------
+ * Description: 
+ ********************************************/
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Environment {
     private CustomPanel panel = new CustomPanel();
-    private HashMap<Integer,Coordinate> avatarsLocations = new HashMap<>();
+    private HashMap<Integer, Coordinate> avatarsLocations = new HashMap<>();
 
-
-    public Environment() {
-        panel.createFrame();
-    }  // create the frame for our environment
-
-    public ArrayList<SpaceType> getAdjacentToAvatar(int avatarId){
+    public ArrayList<SpaceType> getAdjacentToAvatar(int avatarId) {
 
         ArrayList<SpaceType> adjacentToAvatar = new ArrayList<>();
 
@@ -35,19 +38,19 @@ public class Environment {
         // SpaceType leftSpace = room.getSpace(leftX, currentY);
         // SpaceType downSpace = room.getSpace(currentX, downY);
 
-        SpaceType rightSpace = panel.getSpace(rightX, currentY);
-        SpaceType upSpace = panel.getSpace(currentX, upY);
-        SpaceType leftSpace = panel.getSpace(leftX, currentY);
-        SpaceType downSpace = panel.getSpace(currentX, downY);
+        // SpaceType rightSpace = panel.getSpace(rightX, currentY);
+        // SpaceType upSpace = panel.getSpace(currentX, upY);
+        // SpaceType leftSpace = panel.getSpace(leftX, currentY);
+        // SpaceType downSpace = panel.getSpace(currentX, downY);
 
-        // Add spaceTypes to array
-        adjacentToAvatar.add(rightSpace);
-        adjacentToAvatar.add(upSpace);
-        adjacentToAvatar.add(leftSpace);
-        adjacentToAvatar.add(downSpace);
+        // // Add spaceTypes to array
+        // adjacentToAvatar.add(rightSpace);
+        // adjacentToAvatar.add(upSpace);
+        // adjacentToAvatar.add(leftSpace);
+        // adjacentToAvatar.add(downSpace);
 
         // return an array of SpaceTypes with the spaces that are adjacent to the avatar
         return adjacentToAvatar;
     }
-    
+
 }

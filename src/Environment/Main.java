@@ -1,7 +1,7 @@
 package Environment;
 
 /********************************************
- * Author: Soodeh,...
+ * Author: Soodeh, Ole, Paola
  * Version: v.2
  * Date:   20240412
  * ------------------------------------------
@@ -13,7 +13,6 @@ package Environment;
     public static void main(String[] args) {
         Environment environment = new Environment();
 
-        // environment.
         // environment.getAdjacentToAvatar(1);
     }
 }
