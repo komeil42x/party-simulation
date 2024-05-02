@@ -94,7 +94,8 @@ public class CustomPanel {
         new SliderPanel(bottomRight);
         // create grid
         // --------------------------------------
-        new Grid(environmentLeft, LINES, COLUMNS);
+        new Grid(environmentLeft);
+
         // make frame visible
         // --------------------------------------
         frame.setVisible(true);

@@ -11,8 +11,14 @@ package Environment;
 
  public class Main {
     public static void main(String[] args) {
+
         Environment environment = new Environment();
 
-        // environment.getAdjacentToAvatar(1);
+        // Obtain information about the position of the avatar and its surroundings
+        environment.getAdjacentToAvatar(1);
+        // move avatar in one direction
+        environment.moveAvatar(1, Direction.UP);
+        // place avatar in the desired cell
+        // environment.placeAvatar(1);
     }
 }

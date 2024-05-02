@@ -19,9 +19,12 @@ import javax.swing.JPanel;
 
 public class Grid {
 
-    public Grid(JPanel panel, int lines, int columns) {
+    final static int LINES = 40;
+    final static int COLUMNS = 80;
 
-        JPanel pitchPanel = new JPanel(new GridLayout(lines, columns));
+    public Grid(JPanel panel) {
+
+        JPanel pitchPanel = new JPanel(new GridLayout(LINES, COLUMNS));
         pitchPanel.setBackground(Color.WHITE);
         // change size of the grid, if frame changes
         panel.addComponentListener(new ComponentAdapter() {
@@ -33,8 +36,8 @@ public class Grid {
         });
 
         // Add border to each cell in the grid
-        for (int i = 0; i < lines; i++) {
-            for (int j = 0; j < columns; j++) {
+        for (int i = 0; i < LINES; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
                 JPanel cell = new JPanel();
                 cell.setBackground(Color.WHITE);
                 cell.setBorder(BorderFactory.createLineBorder(Color.lightGray));
@@ -46,14 +49,19 @@ public class Grid {
         panel.add(pitchPanel);
     }
 
-    // // Method to get the space at a specific coordinate
-    // public SpaceType getSpace(int x, int y) {
-    //     if (isValidCoordinate(x, y)) {
-    //         return cellsOccupancy.get(x).get(y);
-    //     } else {
-    //         return null; // Or throw an exception?
-    //     }
-    // }
+
+
+
+    
+    // Method to get the space at a specific coordinate
+    public static SpaceType getSpace(int x, int y) {
+        if (isValidCoordinate(x, y)) {
+            // return cellsOccupancy.get(x).get(y);
+            return null;
+        } else {
+            return null; // Or throw an exception?
+        }
+    }
 
     // // Method to set the space at a specific coordinate
     // public void setSpace(int x, int y, SpaceType spaceType) throws Exception {
@@ -64,8 +72,8 @@ public class Grid {
     //     }
     // }
 
-    // // Helper method to check if the given coordinates are valid
-    // private boolean isValidCoordinate(int x, int y) {
-    //     return x >= 0 && x < numRows && y >= 0 && y < numCols;
-    // }
+    // Helper method to check if the given coordinates are valid
+    private static boolean isValidCoordinate(int x, int y) {
+        return x >= 0 && x < LINES && y >= 0 && y < COLUMNS;
+    }
 }
