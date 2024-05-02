@@ -1,17 +1,18 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Room {
+    // dictionary to store avatars locations as coordinates (key: avatarId, value: avatar coordinate)
+    private HashMap<Integer, Coordinate> avatarsLocations = new HashMap<>(); 
     private ArrayList<ArrayList<SpaceType>> cellsOccupancy;
-    private CustomPanel grid = new CustomPanel();
     private int numRows;
     private int numCols;
 
     // Constructor
-    public Room() {
-        ArrayList<Integer> roomSize = paintGrid();
-        // TODO is this the best way to set the room size? discuss with team
-        this.numRows = roomSize.get(1);
-        this.numCols = roomSize.get(2);
+    public Room(int numCols, int numRows) {
+
+        this.numRows = numRows;
+        this.numCols = numCols;
         cellsOccupancy = new ArrayList<>(numRows);
         // Initialize the rows
         for (int i = 0; i < numRows; i++) {
@@ -46,7 +47,40 @@ public class Room {
         return x >= 0 && x < numRows && y >= 0 && y < numCols;
     }
 
-    
+    public void findPlaceForAvatar(int avatarId) {
+        Coordinate randomCoordinate;
+        do {
+            // Generate a random location
+            int randomX = (int )(Math.random() * numCols + 1);
+            int randomY = (int )(Math.random() * numRows + 1);
+            randomCoordinate = new Coordinate(randomX, randomY);
+            
+        // Repeat if randomCoordinate is occupied
+        } while (randomCoordinateIsNotEmpty(randomCoordinate));
+        
+        // if coordinate is empty, assign it to the avatar and update 2D array
+        placeAvatar(avatarId, randomCoordinate);
+    }
+
+    private void placeAvatar(int avatarId, Coordinate targetCoordinate) {
+        // Set the SpaceType of the cell at coordinate targetCoordinate to AVATAR
+        cellsOccupancy.get(targetCoordinate.getX()).set(targetCoordinate.getY(), SpaceType.AVATAR);
+
+        // Update HashMap avatarsLocations with key avatarId and value targetCoordinate
+        avatarsLocations.put(avatarId, targetCoordinate);
+    }
+
+    private boolean randomCoordinateIsNotEmpty(Coordinate randomCoordinate) {
+        // search the internal 2D array to see what is there inside cell with randomCoordinate
+        SpaceType cellInfo = cellsOccupancy.get(randomCoordinate.getX()).get(randomCoordinate.getY());
+        // check if it is of SpaceType OBSTACLE or AVATAR
+        if(cellInfo == SpaceType.OBSTACLE || cellInfo == SpaceType.AVATAR){
+            return true; // It is occupied!
+        }
+        // If not occupied, return false;
+        return false;
+    }
+
     public ArrayList<Integer> paintGrid() {
         // TODO implement the drawing part, based on the painted grid, the roomSize is set
 
@@ -58,4 +92,37 @@ public class Room {
         return roomSize;
     }
 
+    public ArrayList<SpaceInfo> getAdjacentToAvatar(int avatarId) {
+        ArrayList<SpaceInfo> adjacentToAvatar = new ArrayList<>();
+
+        // with avatarId, look up position of Avatar in avatarsLocations
+        Coordinate avatarCoordinate = avatarsLocations.get(avatarId);
+
+        // Get the current coordinates of the avatar
+        int currentX = avatarCoordinate.getX();
+        int currentY = avatarCoordinate.getY();
+
+        // Calculate the coordinates of the adjacent cells
+        int rightX = currentX + 1;
+        int upY = currentY + 1;
+        int leftX = currentX - 1;
+        int downY = currentY - 1;
+
+        // Retrieve what is there in the 2D array/grid
+        SpaceType rightSpace = getSpace(rightX, currentY);
+        SpaceType upSpace = getSpace(currentX, upY);
+        SpaceType leftSpace = getSpace(leftX, currentY);
+        SpaceType downSpace = getSpace(currentX, downY);
+
+        // Add spaceInfos to array
+        adjacentToAvatar.add(new SpaceInfo(new Coordinate(rightX, currentY), rightSpace));
+        adjacentToAvatar.add(new SpaceInfo(new Coordinate(currentX, upY), upSpace));
+        adjacentToAvatar.add(new SpaceInfo(new Coordinate(leftX, currentY), leftSpace));
+        adjacentToAvatar.add(new SpaceInfo(new Coordinate(currentX, downY), downSpace));
+
+        // return an array of SpaceTypes with the spaces that are adjacent to the avatar
+        return adjacentToAvatar;
+    }
+
+    
 }
