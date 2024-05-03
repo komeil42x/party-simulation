@@ -115,8 +115,6 @@ public class SimulationGUI {
         this.numRows = numRows;
     }
 
-    
-
     public int getNumCols() {
         return numCols;
     }
@@ -170,6 +168,5 @@ public class SimulationGUI {
 
         panelLeft.add(pitchPanel);
     }
-
 
 }
