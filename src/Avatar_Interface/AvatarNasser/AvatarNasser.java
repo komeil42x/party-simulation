@@ -29,6 +29,7 @@ public class AvatarNasser extends SuperAvatar {
 			case 3: return Direction.DOWN;
 			default: return Direction.STAY;
 		}
+        
     }
 
     @Override

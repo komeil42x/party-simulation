@@ -1,7 +1,6 @@
 package Avatar_Interface;
-import java.util.ArrayList;
-
 import Environment.SpaceType;
+import java.util.ArrayList;
 
 public class TestAvatar extends SuperAvatar {
 	public TestAvatar(int id) {

@@ -4,6 +4,6 @@
 /**
  * 
  */
-module Avatar_Interface {
+module Environment {
     requires java.desktop;
 }
