@@ -16,7 +16,7 @@ import java.awt.*;
  
  public class CustomPanel {
  
-     private InputsPanel inputs = new InputsPanel();
+     private SliderPanel inputs = new SliderPanel();
  
      public void createFrame() {
          // Frame
