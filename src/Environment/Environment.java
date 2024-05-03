@@ -2,6 +2,7 @@ package Environment;
 
 import AvatarInterface.*;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.event.ChangeEvent;
@@ -60,7 +61,7 @@ public class Environment {
     public void placeAvatar(int avatarId) {
         Coordinate avatarCoordinate = model.findPlaceForAvatar(avatarId);
         if (avatarCoordinate != null) {
-            view.paintAvatar(avatarCoordinate);
+            view.paintAvatar(avatarCoordinate, Color.GREEN);
         }
     }
 
@@ -73,5 +74,29 @@ public class Environment {
      */
     public ArrayList<SpaceInfo> getAdjacentToAvatar(int avatarId, int perceptionRange) {
         return model.getAdjacentToAvatar(avatarId, perceptionRange);
+    }
+
+    /**
+     * Moves an avatar in the specified direction.
+     * 
+     * @param avatarID the ID of the avatar to be moved
+     * @param dir      the direction in which to move the avatar
+     * @return true if the avatar was successfully moved, false otherwise
+     */
+    public boolean moveAvatar(int avatarID, Direction dir) {
+        Coordinate currentPos = model.getAvatarLocation(avatarID);
+        if (currentPos == null) {
+            return false; // Avatar ID not found
+        }
+
+        Coordinate newPos = switch (dir) {
+            case UP -> new Coordinate(currentPos.getX() - 1, currentPos.getY());
+            case DOWN -> new Coordinate(currentPos.getX() + 1, currentPos.getY());
+            case LEFT -> new Coordinate(currentPos.getX(), currentPos.getY() - 1);
+            case RIGHT -> new Coordinate(currentPos.getX(), currentPos.getY() + 1);
+            default -> currentPos; // Stay in place for default case
+        };
+
+        return model.tryToPlaceAvatar(avatarID, newPos);
     }
 }

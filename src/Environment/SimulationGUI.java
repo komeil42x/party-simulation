@@ -261,4 +261,20 @@ public class SimulationGUI {
         panel.add(slider, BorderLayout.CENTER);
     }
 
+    /**
+     * Paints the avatar on the simulation GUI at the specified coordinate with the given color.
+     * If the color is null, the default color is blue.
+     *
+     * @param coordinate the coordinate where the avatar should be painted
+     * @param color the color of the avatar
+     */
+    public void paintAvatar(Coordinate coordinate, Color color) {
+        if (color == null) {
+            color = Color.BLUE; // Default color is blue
+        }
+
+        JPanel pitchPanel = (JPanel) environmentLeft.getComponent(0);
+        JPanel cell = (JPanel) pitchPanel.getComponent(coordinate.getX() * getNumCols() + coordinate.getY());
+        cell.setBackground(color);
+    }
 }

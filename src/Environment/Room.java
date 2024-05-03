@@ -58,6 +58,10 @@ public class Room {
         }
     }
 
+    public Coordinate getAvatarLocation(int avatarID) {
+        return avatarsLocations.get(avatarID);
+    }
+
     /**
      * Sets the number of rows in the room.
      *
@@ -268,30 +272,6 @@ public class Room {
             avatarsLocations.remove(avatarID);
             findPlaceForAvatar(avatarID);
         }
-    }
-
-    /**
-     * Moves an avatar in the specified direction.
-     * 
-     * @param avatarID the ID of the avatar to be moved
-     * @param dir      the direction in which to move the avatar
-     * @return true if the avatar was successfully moved, false otherwise
-     */
-    public boolean moveAvatar(int avatarID, Direction dir) {
-        Coordinate currentPos = avatarsLocations.get(avatarID);
-        if (currentPos == null) {
-            return false; // Avatar ID not found
-        }
-
-        Coordinate newPos = switch (dir) {
-            case UP -> new Coordinate(currentPos.getX() - 1, currentPos.getY());
-            case DOWN -> new Coordinate(currentPos.getX() + 1, currentPos.getY());
-            case LEFT -> new Coordinate(currentPos.getX(), currentPos.getY() - 1);
-            case RIGHT -> new Coordinate(currentPos.getX(), currentPos.getY() + 1);
-            default -> currentPos; // Stay in place for default case
-        };
-
-        return tryToPlaceAvatar(avatarID, newPos);
     }
 
     /**
