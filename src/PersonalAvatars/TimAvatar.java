@@ -1,7 +1,8 @@
-package AvatarInterface;
+package PersonalAvatars;
 
 import java.util.ArrayList;
 import Environment.*;
+import AvatarInterface.*;
 
 public class TimAvatar extends SuperAvatar { // implements AvatarInterface
 	public TimAvatar(int id) {
@@ -19,11 +20,10 @@ public class TimAvatar extends SuperAvatar { // implements AvatarInterface
 			case 1: return Direction.RIGHT;
 			case 2: return Direction.UP;
 			case 3: return Direction.DOWN;
-            case 4: return Diretion.Down
 
 			default: return Direction.STAY;
 		}	
-        spacesInRange.get(1).getType
+       
 	}
 
 	
