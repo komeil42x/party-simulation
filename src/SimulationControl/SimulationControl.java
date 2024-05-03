@@ -2,10 +2,10 @@ package SimulationControl;
 
 import Environment.*;
 import Environment.SpaceType;
+import Environment.SpaceInfo;
 
 import java.util.ArrayList;
 import Avatar_Interface.*;
-import Avatar_Interface.AvatarNasser.*;
 
 
 public class SimulationControl {
@@ -19,13 +19,13 @@ public class SimulationControl {
 		environment = new Environment();
 
 		for (int i = 0; i < 12; i++){
-			avatars.add(new AvatarNasser(i));
+			avatars.add(new TestAvatar(i));
 		}
 	}
 	
-	public void loopThroughAvatars(SuperAvatar[] avatars) {
+	public void loopThroughAvatars() {
 		for (SuperAvatar avatar : avatars) {
-			ArrayList<SpaceType> si = environment.getAdjacentToAvatar(avatar.getAvatarID());
+			ArrayList<SpaceInfo> si = environment.getAdjacentToAvatar(avatar.getAvatarID());
 			Avatar_Interface.Direction dir = avatar.yourTurn(si);
 			// boolean hasMoved = environment.moveAvatar(avatar.getAvatarID(), dir);
 			// avatars.setHasMoved(hasMoved);
