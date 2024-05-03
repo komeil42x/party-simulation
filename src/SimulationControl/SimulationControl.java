@@ -17,15 +17,16 @@ public class SimulationControl {
 		System.out.println("Hallo");
 
 		environment = new Environment();
-
-		for (int i = 0; i < 12; i++){
-			avatars.add(new AvatarNasser(i));
+		int i = 0;
+		for (i = 0; i < 12; i++){
+			avatars.add(new TestAvatar(i));
 		}
+		avatars.add(new AvatarNasser(i+1));
 	}
 	
-	public void loopThroughAvatars(SuperAvatar[] avatars) {
+	public void loopThroughAvatars() {
 		for (SuperAvatar avatar : avatars) {
-			ArrayList<SpaceType> si = environment.getAdjacentToAvatar(avatar.getAvatarID());
+			SpaceInfo[] si = environment.getAdjacentToAvatar(avatar.getAvatarID());
 			Avatar_Interface.Direction dir = avatar.yourTurn(si);
 			// boolean hasMoved = environment.moveAvatar(avatar.getAvatarID(), dir);
 			// avatars.setHasMoved(hasMoved);

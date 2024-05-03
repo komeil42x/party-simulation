@@ -19,8 +19,6 @@ public class TestAvatar extends SuperAvatar {
 			case 1: return Direction.RIGHT;
 			case 2: return Direction.UP;
 			case 3: return Direction.DOWN;
-			case 4: return Direction.STAY;
-
 			default: return Direction.STAY;
 		}
 	}
