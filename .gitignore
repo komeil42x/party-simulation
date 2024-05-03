@@ -12,7 +12,7 @@
 
 # Package Files #
 *.jar
-!libs/reflections-0.9.12.jar
+!lib/*
 *.war
 *.nar
 *.ear
