@@ -21,6 +21,10 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * The SimulationGUI class represents the graphical user interface for the nightclub simulation.
+ * It provides a grid-based environment for the simulation and allows the user to adjust the size of the grid using a slider.
+ */
 public class SimulationGUI {
 
     // Sizes of the grid
@@ -37,6 +41,11 @@ public class SimulationGUI {
     private int numCols;
     private int numRows;
 
+    
+    /**
+     * The SimulationGUI class represents the graphical user interface for the nightclub simulation.
+     * It creates a frame with panels to display the environment and controls.
+     */
     public SimulationGUI() {
         // Frame
         // --------------------------------------
@@ -120,30 +129,66 @@ public class SimulationGUI {
         frame.setVisible(true);
     }
 
+    /**
+     * Adds a change listener to the slider.
+     *
+     * @param listenForSlider the change listener to be added
+     */
     public void addSlideListener(ChangeListener listenForSlider) {
         slider.addChangeListener(listenForSlider);
     }
 
+    /**
+     * Sets the number of columns in the simulation grid.
+     *
+     * @param numCols the number of columns to set
+     */
     public void setNumCols(int numCols) {
         this.numCols = numCols;
     }
 
+    /**
+     * Sets the number of rows in the simulation GUI.
+     *
+     * @param numRows the number of rows to set
+     */
     public void setNumRows(int numRows) {
         this.numRows = numRows;
     }
 
+    /**
+     * Returns the number of columns in the simulation grid.
+     *
+     * @return the number of columns
+     */
     public int getNumCols() {
         return numCols;
     }
 
+    /**
+     * Returns the number of rows in the simulation GUI.
+     *
+     * @return the number of rows
+     */
     public int getNumRows() {
         return numRows;
     }
 
+    /**
+     * Returns the current value of the slider.
+     *
+     * @return the current value of the slider
+     */
     public int getValue() {
         return slider.getValue();
     }
 
+    /**
+     * Repaints the simulation GUI based on the given value.
+     * The value determines the size of the pitch to be created.
+     * 
+     * @param value the value indicating the size of the pitch
+     */
     public void repaint(int value) {
         environmentLeft.removeAll();
         if (value == 1) {
@@ -163,8 +208,15 @@ public class SimulationGUI {
         environmentLeft.repaint();
     }
 
-    // create the pitch
-    // ------------------------------------------
+    /**
+     * Creates a pitch panel with a grid layout and adds it to the specified panel.
+     * Each cell in the grid has a white background and a light gray border.
+     * Tooltips are created for each cell to identify their position in the grid.
+     *
+     * @param panelLeft the panel to which the pitch panel will be added
+     * @param lines the number of lines in the grid
+     * @param numCols the number of columns in the grid
+     */
     public void createPitch(JPanel panelLeft, int lines, int numCols) {
         JPanel pitchPanel = new JPanel(new GridLayout(lines, numCols));
         pitchPanel.setBackground(Color.WHITE);
@@ -185,8 +237,12 @@ public class SimulationGUI {
         panelLeft.add(pitchPanel);
     }
 
-    // create the pitch
-    // ------------------------------------------
+    /**
+     * Creates a slider component and adds it to the specified panel.
+     * The slider allows the user to adjust the zoom level of the simulation GUI.
+     *
+     * @param panel the panel to which the slider will be added
+     */
     public void createSlider(JPanel panel) {
         panel.setLayout(new BorderLayout());
         slider = new JSlider(SwingConstants.VERTICAL, 1, 3, 2);

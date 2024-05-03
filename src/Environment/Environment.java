@@ -1,14 +1,25 @@
 package Environment;
 
+import AvatarInterface.*;
+
 import java.util.ArrayList;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * The Environment class represents the environment in which the party
+ * simulation takes place.
+ * It manages the room, the simulation GUI, and the interactions between them.
+ */
 public class Environment {
     private Room model;
     private SimulationGUI view;
 
+    /**
+     * Constructs a new Environment object.
+     * Initializes the room and the simulation GUI.
+     */
     public Environment() {
         this.model = new Room(20, 20);
         System.out.println("Room constructed");
@@ -41,24 +52,26 @@ public class Environment {
         });
     }
 
+    /**
+     * Places an avatar in the room.
+     * 
+     * @param avatarId the ID of the avatar to be placed
+     */
     public void placeAvatar(int avatarId) {
-        model.findPlaceForAvatar(avatarId);
-
-        // TODO actually implement code below: make room.findPlaceForAvatar()
-        // return coordinate so view can represent the avatar in the grid
-        // Coordinate avatarCoordinate = room.findPlaceForAvatar(avatarId);
-        // view.paintAvatar(avatarCoordinate);
+        Coordinate avatarCoordinate = model.findPlaceForAvatar(avatarId);
+        if (avatarCoordinate != null) {
+            view.paintAvatar(avatarCoordinate);
+        }
     }
 
+    /**
+     * Gets the adjacent spaces to an avatar within a given perception range.
+     * 
+     * @param avatarId        the ID of the avatar
+     * @param perceptionRange the perception range of the avatar
+     * @return an ArrayList of SpaceInfo objects representing the adjacent spaces
+     */
     public ArrayList<SpaceInfo> getAdjacentToAvatar(int avatarId, int perceptionRange) {
         return model.getAdjacentToAvatar(avatarId, perceptionRange);
     }
-
-    public boolean moveAvatar(int avatarID, Direction dir) {        
-        // TODO implement method to move avatars location to the direction dir and return true if successful. Check if possible to move to the direction, as safety measure.
-        
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'moveAvatar'");
-    }
-
 }

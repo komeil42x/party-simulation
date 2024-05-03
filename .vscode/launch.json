@@ -5,7 +5,7 @@
             "type": "java",
             "name": "Java Launch",
             "request": "launch",
-            "mainClass": "src.SimulationControl.Main"
+            "mainClass": "SimulationControl.Main"
         }
     ]
 }
