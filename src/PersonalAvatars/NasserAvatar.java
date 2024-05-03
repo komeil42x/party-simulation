@@ -8,9 +8,9 @@
 //  * Bewegung vom Avatar in gezielte Richtung
 //  */
 
-// public class AvatarNasser extends SuperAvatar {
+// public class NasserAvatar extends SuperAvatar {
 
-//     public AvatarNasser(int id) {
+//     public NasserAvatar(int id) {
 //         super(id); 
 //     }
 
