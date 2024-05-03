@@ -2,7 +2,7 @@ package AvatarInterface;
 
 public abstract class SuperAvatar implements AvatarInterface {
 
-		private int avatarID;	// identification of Avatar
+		private final int avatarID;	// identification of Avatar
 		private boolean couldMove;
 		//SpaceInfo[] spaceinfo = new SpaceInfo[4];
 		
@@ -13,9 +13,13 @@ public abstract class SuperAvatar implements AvatarInterface {
 		public int getAvatarID() {
 			return avatarID;
 		}
+
+		public boolean getCouldMove() {
+			return couldMove;
+		}
 		
-		public boolean setHasMoved(boolean couldMove) {
-			return this.couldMove;
+		public void setHasMoved(boolean couldMove) {
+			this.couldMove = couldMove;
 		}
 		
 		
