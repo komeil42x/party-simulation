@@ -63,7 +63,7 @@ public class Room {
             randomCoordinate = new Coordinate(randomX, randomY);
             
         // Repeat if randomCoordinate is occupied
-        } while (randomCoordinateIsNotEmpty(randomCoordinate));
+        } while (randomCoordinateIsOccupied(randomCoordinate));
         
         // if coordinate is empty, assign it to the avatar and update 2D array
         placeAvatar(avatarId, randomCoordinate);
@@ -78,7 +78,7 @@ public class Room {
         avatarsLocations.put(avatarId, targetCoordinate);
     }
 
-    private boolean randomCoordinateIsNotEmpty(Coordinate randomCoordinate) {
+    private boolean randomCoordinateIsOccupied(Coordinate randomCoordinate) {
         // search the internal 2D array to see what is there inside cell with randomCoordinate
         SpaceType cellInfo = cellsOccupancy.get(randomCoordinate.getX()).get(randomCoordinate.getY());
         // check if it is of SpaceType OBSTACLE or AVATAR
