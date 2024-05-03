@@ -50,8 +50,15 @@ public class Environment {
         // view.paintAvatar(avatarCoordinate);
     }
 
-    public ArrayList<SpaceInfo> getAdjacentToAvatar(int avatarId) {
-        return model.getAdjacentToAvatar(avatarId);
+    public ArrayList<SpaceInfo> getAdjacentToAvatar(int avatarId, int perceptionRange) {
+        return model.getAdjacentToAvatar(avatarId, perceptionRange);
+    }
+
+    public boolean moveAvatar(int avatarID, Direction dir) {        
+        // TODO implement method to move avatars location to the direction dir and return true if successful. Check if possible to move to the direction, as safety measure.
+        
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'moveAvatar'");
     }
 
 }

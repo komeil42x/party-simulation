@@ -1,16 +1,15 @@
-package PersonalAvatars;
+package AvatarInterface;
 
 import java.util.ArrayList;
 import Environment.*;
-import AvatarInterface.*;
 
-public class PhilippAvatar extends SuperAvatar {
+public class TemplateAvatar extends SuperAvatar { // implements AvatarInterface
 
-    public PhilippAvatar(int id, int perceptionRange) {
-        super(id, perceptionRange); // leverage the super class to handle ID and perceptionRange
-    }
+	public TemplateAvatar(int id, int perceptionRange) {
+		super(id, perceptionRange);
+	}
 
-    @Override
+	@Override
     public Direction yourTurn(ArrayList<SpaceInfo> spacesInRange) {
         // Implement a more sophisticated strategy using spacesInRange
         // For now, let's continue to move randomly as a placeholder

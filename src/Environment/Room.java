@@ -2,14 +2,17 @@ package Environment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.*;
+import AvatarInterface.*;
 
 public class Room {
-    
-     // dictionary to store avatars locations as coordinates (key: avatarId, value: avatar coordinate)
-    private HashMap<Integer, Coordinate> avatarsLocations = new HashMap<>(); 
+
+    // dictionary to store avatars locations as coordinates (key: avatarId, value:
+    // avatar coordinate)
+    private HashMap<Integer, Coordinate> avatarsLocations = new HashMap<>();
     private ArrayList<ArrayList<SpaceType>> cellsOccupancy;
     private int numRows;
     private int numCols;
@@ -39,8 +42,6 @@ public class Room {
         }
     }
 
-    
-
     public void setNumRows(int numRows) {
         this.numRows = numRows;
     }
@@ -67,16 +68,17 @@ public class Room {
         Coordinate randomCoordinate;
         do {
             // Generate a random location
-            int randomX = (int )(Math.random() * numCols + 1);
-            int randomY = (int )(Math.random() * numRows + 1);
+            int randomX = (int) (Math.random() * numCols + 1);
+            int randomY = (int) (Math.random() * numRows + 1);
             randomCoordinate = new Coordinate(randomX, randomY);
-            
-        // Repeat if randomCoordinate is occupied
+
+            // Repeat if randomCoordinate is occupied
         } while (randomCoordinateIsOccupied(randomCoordinate));
-        
+
         // if coordinate is empty, assign it to the avatar and update 2D array
         placeAvatar(avatarId, randomCoordinate);
-        System.out.println("Avatar " + String.valueOf(avatarId) + " located at " + String.valueOf(randomCoordinate.getX()) + ", " + String.valueOf(randomCoordinate.getY()));
+        System.out.println("Avatar " + String.valueOf(avatarId) + " located at "
+                + String.valueOf(randomCoordinate.getX()) + ", " + String.valueOf(randomCoordinate.getY()));
     }
 
     private void placeAvatar(int avatarId, Coordinate targetCoordinate) {
@@ -88,66 +90,90 @@ public class Room {
     }
 
     private boolean randomCoordinateIsOccupied(Coordinate randomCoordinate) {
-        // search the internal 2D array to see what is there inside cell with randomCoordinate
+        // search the internal 2D array to see what is there inside cell with
+        // randomCoordinate
         SpaceType cellInfo = cellsOccupancy.get(randomCoordinate.getX()).get(randomCoordinate.getY());
         // check if it is of SpaceType OBSTACLE or AVATAR
-        if(cellInfo == SpaceType.OBSTACLE || cellInfo == SpaceType.AVATAR){
+        if (cellInfo == SpaceType.OBSTACLE || cellInfo == SpaceType.AVATAR) {
             return true; // It is occupied!
         }
         // If not occupied, return false;
         return false;
     }
 
-    public ArrayList<SpaceInfo> getAdjacentToAvatar(int avatarId) {
+    public ArrayList<SpaceInfo> getAdjacentToAvatar(int avatarId, int perceptionRange) {
         ArrayList<SpaceInfo> adjacentToAvatar = new ArrayList<>();
 
-        // with avatarId, look up position of Avatar in avatarsLocations
+        // Get the avatar's current coordinates from the avatarsLocations map
         Coordinate avatarCoordinate = avatarsLocations.get(avatarId);
+        if (avatarCoordinate == null) {
+            return adjacentToAvatar; // Return empty list if the avatar's coordinate is not found
+        }
 
-        // Get the current coordinates of the avatar
         int currentX = avatarCoordinate.getX();
         int currentY = avatarCoordinate.getY();
 
-        // Calculate the coordinates of the adjacent cells
-        int rightX = currentX + 1;
-        int upY = currentY + 1;
-        int leftX = currentX - 1;
-        int downY = currentY - 1;
+        // Calculate the coordinates of the adjacent cells within the perception range
+        for (int i = currentX - perceptionRange; i <= currentX + perceptionRange; i++) {
+            for (int j = currentY - perceptionRange; j <= currentY + perceptionRange; j++) {
+                if (i == currentX && j == currentY) {
+                    continue; // Skip the current cell (avatar's position)
+                }
+                if (isValidCoordinate(i, j)) {
+                    SpaceType space = cellsOccupancy.get(i).get(j);
+                    adjacentToAvatar.add(new SpaceInfo(new Coordinate(i, j), space));
+                }
+            }
+        }
 
-        // Retrieve what is there in the 2D array/grid
-        SpaceType rightSpace = getSpace(rightX, currentY);
-        SpaceType upSpace = getSpace(currentX, upY);
-        SpaceType leftSpace = getSpace(leftX, currentY);
-        SpaceType downSpace = getSpace(currentX, downY);
-
-        // Add spaceInfos to array
-        adjacentToAvatar.add(new SpaceInfo(new Coordinate(rightX, currentY), rightSpace));
-        adjacentToAvatar.add(new SpaceInfo(new Coordinate(currentX, upY), upSpace));
-        adjacentToAvatar.add(new SpaceInfo(new Coordinate(leftX, currentY), leftSpace));
-        adjacentToAvatar.add(new SpaceInfo(new Coordinate(currentX, downY), downSpace));
-
-        // return an array of SpaceTypes with the spaces that are adjacent to the avatar
-        return adjacentToAvatar;
+        return adjacentToAvatar; // Return the list of SpaceInfo for adjacent spaces
     }
 
-	public void updateRoom(int numCols, int numRows) {
+    public void updateRoom(int newNumCols, int newNumRows) {
+        // Handle downsizing
+        if (newNumCols < numCols || newNumRows < numRows) {
+            relocateAvatarsOutOfBound(newNumCols, newNumRows);
+        }
 
-        // if new  numCols is greater than current numCols && numRows is also greater than current numRows
-            // append empty spaces at end of list
+        // Update rows
+        while (cellsOccupancy.size() > newNumRows) {
+            cellsOccupancy.remove(cellsOccupancy.size() - 1);
+        }
+        while (cellsOccupancy.size() < newNumRows) {
+            ArrayList<SpaceType> newRow = new ArrayList<>();
+            for (int i = 0; i < numCols; i++) {
+                newRow.add(SpaceType.EMPTY);
+            }
+            cellsOccupancy.add(newRow);
+        }
 
-        // if new numCols is smaller than current numCols && numRows is also smaller than current numRows
-            // check what avatars are in the locations that will be removed
-            // relocate avatars
-            // downsize array
+        // Update columns
+        for (ArrayList<SpaceType> row : cellsOccupancy) {
+            while (row.size() > newNumCols) {
+                row.remove(row.size() - 1);
+            }
+            while (row.size() < newNumCols) {
+                row.add(SpaceType.EMPTY);
+            }
+        }
 
-		setNumCols(numCols);
-        setNumRows(numRows);
+        // Update class fields
+        numCols = newNumCols;
+        numRows = newNumRows;
+    }
 
+    private void relocateAvatarsOutOfBound(int newNumCols, int newNumRows) {
+        ArrayList<Integer> avatarsToRemove = new ArrayList<>();
+        for (Map.Entry<Integer, Coordinate> entry : avatarsLocations.entrySet()) {
+            Coordinate coord = entry.getValue();
+            if (coord.getX() >= newNumCols || coord.getY() >= newNumRows) {
+                avatarsToRemove.add(entry.getKey());
+            }
+        }
 
-	}
-
-    
-
-    
-
+        for (Integer avatarId : avatarsToRemove) {
+            avatarsLocations.remove(avatarId);
+            findPlaceForAvatar(avatarId);
+        }
+    }
 }

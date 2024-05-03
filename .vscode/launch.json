@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Java Launch",
+            "request": "launch",
+            "mainClass": "src.SimulationControl.Main"
+        }
+    ]
+}

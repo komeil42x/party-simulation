@@ -9,4 +9,7 @@ import Environment.*;
 
 public interface AvatarInterface {
 	abstract Direction yourTurn(ArrayList<SpaceInfo> spacesInRange);
+  abstract int getPerceptionRange();
+  abstract void setPerceptionRange(int perceptionRange);
+  
 }
