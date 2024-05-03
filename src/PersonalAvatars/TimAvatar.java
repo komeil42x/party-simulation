@@ -1,7 +1,8 @@
-package AvatarInterface;
+package PersonalAvatars;
 
 import java.util.ArrayList;
 import Environment.*;
+import AvatarInterface.*;
 
 public class TimAvatar extends SuperAvatar { // implements AvatarInterface
 	public TimAvatar(int id) {
@@ -22,7 +23,18 @@ public class TimAvatar extends SuperAvatar { // implements AvatarInterface
 
 			default: return Direction.STAY;
 		}	
+       
 	}
 
 	
 }
+
+
+/*EMPTY,
+OBSTACLE,
+AVATAR,
+DANCEFLOOR,
+DJBOOTH,
+TOILET,
+BAR,
+SEATS*/
