@@ -1,4 +1,4 @@
-package Avatar_Interface;
+package AvatarInterface;
 
 public abstract class SuperAvatar implements AvatarInterface {
 
