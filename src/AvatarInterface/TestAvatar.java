@@ -1,4 +1,4 @@
-package Avatar_Interface;
+package AvatarInterface;
 
 import java.util.ArrayList;
 import Environment.*;

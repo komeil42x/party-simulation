@@ -5,7 +5,8 @@ import Environment.SpaceType;
 import Environment.SpaceInfo;
 
 import java.util.ArrayList;
-import Avatar_Interface.*;
+
+import AvatarInterface.*;
 
 
 public class SimulationControl {
@@ -26,8 +27,8 @@ public class SimulationControl {
 	public void loopThroughAvatars() {
 		for (SuperAvatar avatar : avatars) {
 			ArrayList<SpaceInfo> si = environment.getAdjacentToAvatar(avatar.getAvatarID());
-			Avatar_Interface.Direction dir = avatar.yourTurn(si);
-			// boolean hasMoved = environment.moveAvatar(avatar.getAvatarID(), dir);
+			AvatarInterface.Direction dir = avatar.yourTurn(si);
+			boolean hasMoved = environment.moveAvatar(avatar.getAvatarID(), dir);
 			// avatars.setHasMoved(hasMoved);
 			// Avatar mitteilen, ob er sich tatsächlich bewegt hat: hasMoved
 		}
