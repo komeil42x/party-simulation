@@ -1,5 +1,6 @@
-package AvatarInterface;
+package PersonalAvatars;
 
+import AvatarInterface.*;
 import java.util.ArrayList;
 import Environment.*;
 
@@ -17,7 +18,7 @@ public class IvenAvatar extends SuperAvatar { // implements AvatarInterface
 	@Override
 	public Direction yourTurn(ArrayList<SpaceInfo> spacesInRange) {
         for (int i = 0; i>4;i++){
-            SpaceType frontTyp = spacesInRange.get(i).getType;
+            SpaceType frontTyp = spacesInRange.getType;
             Coordinate frontCoord = spacesInRange.get(i).getRelativeToAvatarCoordinate;
         }
         
