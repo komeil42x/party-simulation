@@ -21,9 +21,9 @@ package Environment;
  import javax.swing.event.ChangeEvent;
  import javax.swing.event.ChangeListener;
  
- public class InputsPanel implements ChangeListener {
+ public class SliderPanel implements ChangeListener {
  
-     private Room grid = new Room();
+     private Room grid = new Room(20, 20);
  
      // Sizes of the grid
      // --------------------------------------
