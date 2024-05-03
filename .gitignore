@@ -27,3 +27,6 @@ replay_pid*
 .project
 .DS_Store
 src/.DS_Store
+party-simulation.iml
+src/Avatar_Interface/Avatar_Interface.iml
+.idea/
