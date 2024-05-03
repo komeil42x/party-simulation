@@ -2,7 +2,6 @@ package Environment;
 
 import java.util.ArrayList;
 
-
 public class Environment {
     private Room model;
     private SimulationGUI view;
