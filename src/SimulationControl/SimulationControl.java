@@ -22,7 +22,9 @@ public class SimulationControl {
      * @param perceptionRange the perception range of the avatars
      */
     public SimulationControl(int perceptionRange) {
+        System.out.println("gonna create environment");
         environment = new Environment();
+        System.out.println("environment created");
 
         Reflections reflections = new Reflections("PersonalAvatars");
 

@@ -9,8 +9,9 @@ import javax.swing.*;
 import AvatarInterface.*;
 
 /**
- * Manages the room environment for avatars in a simulation. 
- * This includes tracking and managing space occupancy, avatar locations, and room dimensions.
+ * Manages the room environment for avatars in a simulation.
+ * This includes tracking and managing space occupancy, avatar locations, and
+ * room dimensions.
  */
 public class Room {
 
@@ -48,18 +49,31 @@ public class Room {
      *
      * @param x the x-coordinate (row index)
      * @param y the y-coordinate (column index)
-     * @return the SpaceType at the specified coordinate, or null if coordinates are invalid
+     * @return the SpaceType at the specified coordinate, or null if coordinates are
+     *         invalid
      */
-    public SpaceType getSpace(int x, int y) {
-        if (isValidCoordinate(x, y)) {
-            return cellsOccupancy.get(x).get(y);
+    public SpaceType getSpace(Coordinate position) {
+        if (isValidCoordinate(position)) {
+            return cellsOccupancy.get(position.getX()).get(position.getY());
         } else {
             return null; // Or throw an exception?
         }
     }
 
+    /**
+     * Retrieves the coordinates of an avatar by its ID.
+     * 
+     * @param avatarID the ID of the avatar
+     * @return the coordinates of the avatar
+     * @throws IllegalArgumentException if the avatar ID is not found
+     */
     public Coordinate getAvatarLocation(int avatarID) {
-        return avatarsLocations.get(avatarID);
+        Coordinate location = avatarsLocations.get(avatarID);
+        if (location != null) {
+            return location;
+        } else {
+            throw new IllegalArgumentException("Avatar with ID " + avatarID + " not found.");
+        }
     }
 
     /**
@@ -101,16 +115,17 @@ public class Room {
     /**
      * Sets the type of space at a specified coordinate.
      *
-     * @param x the x-coordinate (row index)
-     * @param y the y-coordinate (column index)
+     * @param x         the x-coordinate (row index)
+     * @param y         the y-coordinate (column index)
      * @param spaceType the new space type to set at the coordinate
      * @throws Exception if the coordinates are invalid
      */
-    public void setSpace(int x, int y, SpaceType spaceType) throws Exception {
-        if (isValidCoordinate(x, y)) {
-            cellsOccupancy.get(x).set(y, spaceType);
+    public void setSpace(Coordinate position, SpaceType spaceType) throws Exception {
+        if (isValidCoordinate(position)) {
+            cellsOccupancy.get(position.getX()).set(position.getY(), spaceType);
         } else {
-            throw new Exception("Cannot set space " + spaceType.toString() + " because the coodinate is not valid.");
+            throw new Exception("Cannot set space " + spaceType.toString() + " because the coodinate X: "
+                    + position.getX() + ", Y: " + position.getY() + " is not valid.");
         }
     }
 
@@ -121,8 +136,13 @@ public class Room {
      * @param y the y-coordinate (column index)
      * @return true if the coordinates are valid, false otherwise
      */
-    public boolean isValidCoordinate(int x, int y) {
-        return x >= 0 && x < numRows && y >= 0 && y < numCols;
+    public boolean isValidCoordinate(Coordinate position) {
+        int x = position.getX();
+        int y = position.getY();
+        return x >= 0
+                && x < numRows
+                && y >= 0
+                && y < numCols;
     }
 
     /**
@@ -138,15 +158,16 @@ public class Room {
             int randomY = (int) (Math.random() * getNumRows());
             randomCoordinate = new Coordinate(randomX, randomY);
         } while (isOccupied(randomCoordinate));
-        
+
         placeAvatar(avatarID, randomCoordinate);
         return randomCoordinate;
     }
 
     /**
-     * Places an avatar at a specified coordinate, updating the room's occupancy data.
+     * Places an avatar at a specified coordinate, updating the room's occupancy
+     * data.
      *
-     * @param avatarID the ID of the avatar
+     * @param avatarID         the ID of the avatar
      * @param targetCoordinate the coordinate at which to place the avatar
      */
     private void placeAvatar(int avatarID, Coordinate targetCoordinate) {
@@ -168,17 +189,19 @@ public class Room {
         // randomCoordinate
         SpaceType cellInfo = cellsOccupancy.get(coordinate.getX()).get(coordinate.getY());
         // check if it is of SpaceType OBSTACLE or AVATAR
-        if (cellInfo == SpaceType.OBSTACLE || cellInfo == SpaceType.AVATAR) {// does a bar not also qualify as an obstacle?
-            return true; // It is occupied!
+        if (cellInfo == SpaceType.OBSTACLE || cellInfo == SpaceType.AVATAR) {// does the bar not also qualify as an
+                                                                             // obstacle? I would not stand on the bar
+                                                                             // at a club (depends on alcohol level)
+            return true;
         }
-        // If not occupied, return false;
         return false;
     }
 
     /**
-     * Retrieves a list of spaces adjacent to a specified avatar's location, within a given perception range.
+     * Retrieves a list of spaces adjacent to a specified avatar's location, within
+     * a given perception range.
      *
-     * @param avatarID the ID of the avatar
+     * @param avatarID        the ID of the avatar
      * @param perceptionRange the range within which to check for adjacent spaces
      * @return a list of SpaceInfo objects representing the adjacent spaces
      */
@@ -200,7 +223,7 @@ public class Room {
                 if (i == currentX && j == currentY) {
                     continue; // Skip the current cell (avatar's position)
                 }
-                if (isValidCoordinate(i, j)) {
+                if (isValidCoordinate(new Coordinate(i, j))) {
                     SpaceType space = cellsOccupancy.get(i).get(j);
                     adjacentToAvatar.add(new SpaceInfo(new Coordinate(i, j), space));
                 }
@@ -212,8 +235,10 @@ public class Room {
 
     /**
      * Updates the dimensions of the room and adjusts the occupancy accordingly.
-     * If the new dimensions are smaller than the current dimensions, avatars are relocated to fit within the new boundaries.
-     * If the new dimensions are larger than the current dimensions, empty spaces are added to accommodate the new size.
+     * If the new dimensions are smaller than the current dimensions, avatars are
+     * relocated to fit within the new boundaries.
+     * If the new dimensions are larger than the current dimensions, empty spaces
+     * are added to accommodate the new size.
      *
      * @param newNumCols the new number of columns in the room
      * @param newNumRows the new number of rows in the room
@@ -278,11 +303,11 @@ public class Room {
      * Tries to move the avatar to the specified position.
      * 
      * @param avatarID the ID of the avatar to be moved
-     * @param newPos the new position to move the avatar to
+     * @param newPos   the new position to move the avatar to
      * @return true if the avatar was successfully moved, false otherwise
      */
     public boolean tryToPlaceAvatar(int avatarID, Coordinate newPos) {
-        if (isValidCoordinate(newPos.getX(), newPos.getY()) &&
+        if (isValidCoordinate(newPos) &&
                 isOccupied(newPos) == false) {
             placeAvatar(avatarID, newPos);
             return true;

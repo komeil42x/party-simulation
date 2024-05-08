@@ -86,8 +86,9 @@ public class Environment {
     public boolean moveAvatar(int avatarID, Direction dir) {
         Coordinate currentPos = model.getAvatarLocation(avatarID);
         if (currentPos == null) {
-            return false; // Avatar ID not found
+            throw new IllegalArgumentException("Avatar " + avatarID + " does not exist in the room.");
         }
+        System.out.println("getAvatarLocation(Avatar " + avatarID + ") returns: X: " + currentPos.getX() + ", Y: " + currentPos.getY());
 
         Coordinate newPos = switch (dir) {
             case UP -> new Coordinate(currentPos.getX() - 1, currentPos.getY());

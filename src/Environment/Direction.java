@@ -6,9 +6,9 @@ package Environment;
  * The directions are UP, RIGHT, DOWN, LEFT, and STAY.
  */
 public enum Direction {
-    UP, 
-    RIGHT, 
-    DOWN, 
+    UP,
+    RIGHT,
+    DOWN,
     LEFT,
     STAY
 }

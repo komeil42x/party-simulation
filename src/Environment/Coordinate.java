@@ -1,5 +1,7 @@
 package Environment;
 
+import java.util.Objects;
+
 /********************************************
  * Author: Soodeh,...
  * Version: v.1
@@ -46,20 +48,35 @@ public class Coordinate {
     }
 
     /**
-     * Sets the x-coordinate of this Coordinate.
+     * Compares this coordinate with the specified object for equality.
+     * The result is {@code true} if and only if the argument is not {@code null}
+     * and is a
+     * {@code Coordinate} object that has the same x and y values as this object.
      *
-     * @param x the new x-coordinate
+     * @param obj the object to compare this {@code Coordinate} against
+     * @return {@code true} if the given object represents a {@code Coordinate}
+     *         equivalent to this coordinate, {@code false} otherwise
      */
-    public void setX(int x) {
-        this.x = x;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Coordinate that = (Coordinate) obj;
+        return x == that.x && y == that.y;
     }
 
     /**
-     * Sets the y-coordinate of this Coordinate.
+     * Returns a hash code for this coordinate.
+     * The hash code value of this object is computed using the x and y coordinates,
+     * ensuring consistency with {@link #equals(Object)} such that equal coordinates
+     * always produce the same hash code value.
      *
-     * @param y the new y-coordinate
+     * @return a hash code value for this object.
      */
-    public void setY(int y) {
-        this.y = y;
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }
