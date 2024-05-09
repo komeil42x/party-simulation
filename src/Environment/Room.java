@@ -2,10 +2,6 @@ package Environment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GridLayout;
-import javax.swing.*;
 
 public class Room {
     
@@ -39,8 +35,6 @@ public class Room {
             return null; // Or throw an exception?
         }
     }
-
-    
 
     public void setNumRows(int numRows) {
         this.numRows = numRows;
@@ -132,23 +126,52 @@ public class Room {
     }
 
 	public void updateRoom(int numCols, int numRows) {
+        // Get the current dimensions of the room
+        int currentNumCols = this.numCols;
+        int currentNumRows = this.numRows;
 
-        // if new  numCols is greater than current numCols && numRows is also greater than current numRows
-            // append empty spaces at end of list
+        // If the new dimensions are greater than the current dimensions
+        if (numCols > currentNumCols && numRows > currentNumRows) {
+            // Append empty spaces at the end of each row to accommodate the new numCols
+            for (ArrayList<SpaceType> row : cellsOccupancy) {
+                int spacesToAdd = numCols - currentNumCols;
+                for (int i = 0; i < spacesToAdd; i++) {
+                    row.add(SpaceType.EMPTY);
+                }
+            }
+            // Add new rows if needed
+            int rowsToAdd = numRows - currentNumRows;
+            for (int i = 0; i < rowsToAdd; i++) {
+                ArrayList<SpaceType> newRow = new ArrayList<>(numCols);
+                for (int j = 0; j < numCols; j++) {
+                    newRow.add(SpaceType.EMPTY);
+                }
+                cellsOccupancy.add(newRow);
+            }
+        } 
 
-        // if new numCols is smaller than current numCols && numRows is also smaller than current numRows
-            // check what avatars are in the locations that will be removed
-            // relocate avatars
-            // downsize array
+        // If the new dimensions are smaller than the current dimensions
+        else if (numCols < currentNumCols && numRows < currentNumRows) {
+            // Check and relocate avatars if they are in the locations that will be removed
+            for (Integer avatarId : avatarsLocations.keySet()) {
+                Coordinate avatarCoordinate = avatarsLocations.get(avatarId);
+                int avatarX = avatarCoordinate.getX();
+                int avatarY = avatarCoordinate.getY();
+                if (avatarX >= numCols || avatarY >= numRows) {
+                    findPlaceForAvatar(avatarId);
+                }
+            }
+            // Downsize the room array
+            for (ArrayList<SpaceType> row : cellsOccupancy) {
+                row.subList(numCols, currentNumCols).clear();
+            }
+            cellsOccupancy.subList(numRows, currentNumRows).clear();
+        }
 
-		setNumCols(numCols);
+        cellsOccupancy.size();
+
+        // Update the room dimensions
+        setNumCols(numCols);
         setNumRows(numRows);
-
-
-	}
-
-    
-
-    
-
+    }
 }
