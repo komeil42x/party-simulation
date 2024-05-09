@@ -1,18 +1,16 @@
 package Environment;
 
-
-
 public class SpaceInfo {
-    Coordinate relativeToAvataCoordinate;
+    Coordinate relativeToAvatarCoordinate;
     SpaceType type;
 
-    public SpaceInfo(Coordinate relativeToAvataCoordinate, SpaceType type) {
-        this.relativeToAvataCoordinate = relativeToAvataCoordinate;
+    public SpaceInfo(Coordinate relativeToAvatarCoordinate, SpaceType type) {
+        this.relativeToAvatarCoordinate = relativeToAvatarCoordinate;
         this.type = type;
     }
 
-    public Coordinate getRelativeToAvataCoordinate() {
-        return relativeToAvataCoordinate;
+    public Coordinate getRelativeToAvatarCoordinate() {
+        return relativeToAvatarCoordinate;
     }
     public SpaceType getType() {
         return type;

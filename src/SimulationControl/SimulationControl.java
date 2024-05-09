@@ -1,13 +1,12 @@
 package SimulationControl;
 
-import Environment.*;
 import java.util.ArrayList;
-import Avatar_Interface.*;
-
+import Environment.*;
+import AvatarInterface.*;
 
 public class SimulationControl {
 
-	private ArrayList<AvatarInterface> avatars = new ArrayList<AvatarInterface>();
+	private ArrayList<SuperAvatar> avatars = new ArrayList<SuperAvatar>();
 	private Environment environment;
 	
 	public SimulationControl() {
@@ -18,18 +17,17 @@ public class SimulationControl {
 		for (int i = 0; i < 12; i++){
 			avatars.add(new TestAvatar(i));
 		}
+		// avatars.add(new AvatarNasser(i+1));
 	}
 	
-	public void loopThroughAvatars(AvatarInterface[] avatars) {
-		for (AvatarInterface avatar : avatars) {
-			SpaceInfo[] si = environment.getAdjacentToAvatar(avatar.getId());
-			avatar.yourTurn(si);
-			Direction dir = ;
-			boolean hasMoved = environment.moveAvatar(avatar.getID(), dir);
+	public void loopThroughAvatars() {
+		for (SuperAvatar avatar : avatars) {
+			ArrayList<SpaceInfo> si = environment.getAdjacentToAvatar(avatar.getAvatarID());
+			Direction dir = avatar.yourTurn(si);
+			// boolean hasMoved = environment.moveAvatar(avatar.getAvatarID(), dir);
+			// avatars.setHasMoved(hasMoved);
 			// Avatar mitteilen, ob er sich tatsächlich bewegt hat: hasMoved
 		}
 	}
 	
 }
-
-// comment
